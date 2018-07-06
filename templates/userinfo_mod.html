@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css"/>
+
+    <link rel="stylesheet" type="text/css" href="css/swiper.css"/>
+    <script type="text/javascript" src="js/swiper.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <style type="text/css">
+        .form-info {
+            border: 1px solid orange;
+            margin: 100px auto;
+            width: 30%;
+            padding: 50px;
+        }
+
+        .form-info h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .form-info .submit {
+            text-align: center;
+        }
+
+        .form-info img {
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+
+        input[type=file] {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="form-info">
+
+        <h2>信息修改</h2>
+{#        {% if data %}#}
+            <form action="/main/userinfo_mod " method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">用户名</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入用户名" value="{{ user.username }}">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">邮箱</label>
+                    <input type="email" class="form-control" placeholder="请输入新的邮箱" value="旧邮箱">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="exampleInputFile">头像</label><br/>
+                    <img class="img-circle" src="/static/upload/{{ user.photo }}" alt=""/>
+                    <input type="file" id="exampleInputFile">
+                </div>
+
+                {#                <div class="form-group clearfix">#}
+                {#                    <label for="exampleInputFile">头像</label><br/>#}
+                {#                    <input type="file"#}
+                {#                           id = "file"#}
+                {#                           onchange="uploadImg(this.files[0])">#}
+                {#                    <img id="preImg"#}
+                {#                         class="photo"#}
+                {#                         width="40"#}
+                {#                         height="40"#}
+                {#                         onclick="file.click()"#}
+                {#                         src="/static/upload/{{ data.login_photo }}">#}
+                {#                </div>#}
+
+                <div class="submit">
+                    <input type="hidden" name="image_path">
+                    <button type="submit" onclick="save()" class="btn btn-primary">提交</button>
+                </div>
+
+            </form>
+{#        {% endif %}#}
+    </div>
+</div>
+
+<script>
+    tinyMCE.init({
+        "theme":"advanced",
+        "mode": "textareas",
+        "width": 800,
+        "height": 400
+    });
+
+    function save() {
+        //  获取form对象
+        document.forms[0].submit();
+    }
+</script>
+{##}
+{#<script>#}
+{#    function uploadImg(file) {#}
+{#        console.log(file);#}
+{#        var xhr = new XMLHttpRequest();#}
+{#        xhr.open('post', 'upload', true);#}
+{#        xhr.onload = function () {#}
+{##}
+{#            data = JSON.parse(xhr.responseText);#}
+{#            alert(data.path);  //将返回的路径设置到image_path的<input>#}
+{#            document.getElementsByName('image_path')[0].value = data.path;#}
+{#            document.getElementById('preImg').src = '/static/upload/' + data.path;#}
+{#        }#}
+{#        // 封装post请求的表单数据#}
+{#        var formdata = new FormData()#}
+{#        formdata.append('img', file);#}
+{#        formdata.append('csrfmiddlewaretoken',#}
+{#            document.getElementsByName('csrfmiddlewaretoken')[0].value)#}
+{#        xhr.send(formdata);#}
+{##}
+{#    }#}
+{#</script>#}
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    {% load static %}
+    <script type="text/javascript" src={% static "js/jquery.js" %}></script>
+    <script type="text/javascript" src={% static "js/bootstrap.js" %}></script>
+
+    <link rel="stylesheet" href={% static "css/bootstrap.css" %}/>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap-theme.css" %}/>
+
+    <link rel="stylesheet" type="text/css" href={% static "css/swiper.css" %}/>
+    <script type="text/javascript" src={% static "js/swiper.js" %}></script>
+    <link rel="stylesheet" type="text/css" href={% static "css/reset.css" %}/>
+    <style type="text/css">
+        .form-info {
+            border: 1px solid orange;
+            margin: 100px auto;
+            width: 30%;
+            padding: 50px;
+        }
+
+        .form-info h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .form-info .submit {
+            text-align: center;
+        }
+
+        .help-block {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="form-info">
+
+        <h2>用户注册</h2>
+
+        <form method="post" action="/main/regist" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">用户名</label>
+                <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="用户名不能为空"
+                       name="username" title="请输入6-16位用户名">
+
+            </div>
+            <p class="help-block">请输入6-16位用户名</p>
+            <div class="form-group">
+                <label for="exampleInputPassword1">密码</label>
+                <input type="password" class="form-control" placeholder="请输入密码" name="passwd" title="请输入6位以上拼音字母组合密码">
+            </div>
+            <p class="help-block">请输入正确密码</p>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">确认密码</label>
+                <input type="password" class="form-control" placeholder="请再次输入密码" name="passwd2" title="请再次输入6位以上拼音字母组合密码">
+            </div>
+            <p class="help-block">请再次输入6位以上拼音字母组合密码</p>
+
+            <div class="form-group">
+                <label for="exampleInputFile">头像</label>
+                <input type="file" id="exampleInputFile" name="photo">
+
+            </div>
+            <div class="submit">
+                <button type="button" onclick="submitForm()" class="btn btn-primary">注册</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</body>
+
+<script src="{% static 'mine/regist.js' %}"></script>
+
+</html>
+
+
